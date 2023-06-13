@@ -71,8 +71,10 @@ public class Enemy : MonoBehaviour
 
     }
 
-
-
+    public void Start()
+    {
+        ps = GameObject.Find("Player").GetComponent<Playerscript>();
+    }
 
 
 

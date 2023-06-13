@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
 
 public class Gun : MonoBehaviour
 {
@@ -13,37 +15,39 @@ public class Gun : MonoBehaviour
     public float ammo;
     public bool canShoot;
     public float maxAmmo = 30f;
+    public TMP_Text text;
+
+    public float shootdelay, timer;
 
 
 
 
     void Update()
     {
+        timer += Time.deltaTime;
         #region shoot
         if (Input.GetMouseButton(0))
         {
-            if (canShoot == true)
+            if (canShoot == true  && timer > shootdelay)
             {
-                if (hasShot == false)
+                ammo -= 1;
+                timer = 0;
+
+                if (Physics.Raycast(cam.transform.position, transform.forward, out hit, 100))
                 {
-                    StopCoroutine(TBS());
-                    if (Physics.Raycast(cam.transform.position, transform.forward, out hit, 100))
+
+                    if (hit.transform.tag == "Enemies")
                     {
-                        if (hit.transform.tag == "Enemies")
-                        {
-                            en = hit.transform.gameObject;
-                            en.GetComponent<Enemy>().health -= damage;
-                            hasShot = true;
-                            StartCoroutine(TBS());
-                        }
+                        en = hit.transform.gameObject;
+                        en.GetComponent<Enemy>().health -= damage;
+                        
                     }
                 }
             }
-            
-            
         }
         #endregion
-        if (ammo < 0)
+            
+        if (ammo <= 0)
         {
             canShoot = false;
         }
@@ -54,20 +58,11 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
-    
-    
-    
-    }
 
-    public IEnumerator TBS()
-    {
-        if(hasShot == true)
-        {
-            yield return new WaitForSeconds(0.2f);
-            hasShot = false;
-        }
-        
+        text.text = ammo.ToString();
     }
+            
+    
 
     public IEnumerator Reload()
     {
@@ -75,21 +70,10 @@ public class Gun : MonoBehaviour
         ammo = maxAmmo;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    public void Start()
-    {
+     public void Start()
+     {
         ammo = maxAmmo;
-    }
+     }
 
 
 
