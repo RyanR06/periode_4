@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     public bool canShoot;
     public float maxAmmo = 30f;
     public TMP_Text text;
+    public Playerscript ps;
 
     public float shootdelay, timer;
 
@@ -38,6 +39,7 @@ public class Gun : MonoBehaviour
 
                     if (hit.transform.tag == "Enemies")
                     {
+                        ps.points += 10;
                         en = hit.transform.gameObject;
                         en.GetComponent<Enemy>().health -= damage;
                         
