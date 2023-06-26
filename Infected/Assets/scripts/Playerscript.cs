@@ -8,13 +8,17 @@ public class Playerscript : MonoBehaviour
     public int points;
     void Start()
     {
-        points += 500; 
+        points += 500;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     
     void Update()
     {
-        
+       if(health <= 0)
+        {
+            Destroy(gameObject);
+        } 
     }
 
     
