@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject mainMenu;
+    public GameObject Settings;
+
+    public ResolutionRes[] res;
+    public void OnClickPlay()
     {
-        
+
+    }
+    public void ResSettings()
+    {
+
     }
 
-    // Update is called once per frame
-    void Update()
+    [System.Serializable]
+    public class ResolutionRes
     {
-        
+        public int width;
+        public int height;
     }
+    
+
+
+
+
 }
