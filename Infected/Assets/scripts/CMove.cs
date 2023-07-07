@@ -18,12 +18,7 @@ public class CMove : MonoBehaviour
 
         t.Rotate(v3 * Time.deltaTime * rotspeed);
     
-        if (ps1.health < 1)
-        {
-            Destroy(this.gameObject);
-        }
-    
-    
-    
+ 
+ 
     }
 }
