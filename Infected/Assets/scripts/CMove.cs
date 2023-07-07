@@ -8,6 +8,7 @@ public class CMove : MonoBehaviour
     public float rotspeed;
     public Vector3 v3;
     public Transform t;
+    public Playerscript ps1;
 
     void Update()
     {
@@ -16,5 +17,13 @@ public class CMove : MonoBehaviour
         v3.x = -mouseY;
 
         t.Rotate(v3 * Time.deltaTime * rotspeed);
+    
+        if (ps1.health < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    
+    
+    
     }
 }

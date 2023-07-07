@@ -18,12 +18,28 @@ public class Playerscript : MonoBehaviour
     void Update()
     {
         text.text = points.ToString();
-       if(health <= 0)
+        if (health < 1)
         {
-            Destroy(gameObject);
-        } 
+            DestroyImmediate(this.gameObject);
+        }
+
+        if (health < 100)
+        {
+            StartCoroutine(Regen());
+        
+        }
+        if (health >= 100) 
+        {
+            health = 100;
+        }
+    
     }
 
+    public IEnumerator Regen()
+    {
+        yield return new WaitForSeconds(3);
+        health += 10f;
+    }
     
 
     

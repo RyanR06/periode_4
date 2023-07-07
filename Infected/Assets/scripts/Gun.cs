@@ -17,6 +17,7 @@ public class Gun : MonoBehaviour
     public float maxAmmo = 30f;
     public TMP_Text text;
     public Playerscript ps;
+    public Enemy enemy;
 
     public float shootdelay, timer;
 
@@ -29,7 +30,7 @@ public class Gun : MonoBehaviour
         #region shoot
         if (Input.GetMouseButton(0))
         {
-            if (canShoot == true  && timer > shootdelay)
+            if (canShoot == true  && timer > delayFactor)
             {
                 ammo -= 1;
                 timer = 0;
@@ -42,7 +43,8 @@ public class Gun : MonoBehaviour
                         ps.points += 10;
                         en = hit.transform.gameObject;
                         en.GetComponent<Enemy>().health -= damage;
-                        
+
+
                     }
                 }
             }
@@ -62,6 +64,38 @@ public class Gun : MonoBehaviour
         }
 
         text.text = ammo.ToString();
+
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (Physics.Raycast(cam.transform.position, transform.forward, out hit, 100))
+            {
+
+                if (hit.transform.tag == "PAPMachine")
+                {
+                    damage *= 2;
+                    delayFactor -= 0.5f;
+
+
+                }
+            }
+
+
+
+        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }
             
     
